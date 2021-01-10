@@ -36,7 +36,7 @@ def HealthCheckIn():
         'accept-encoding' : 'gzip, deflate, br'
     }
 ```
-###更换地址
+### 更换地址
 ```python 
 Hpostdata = {
         'answers' : '["0","36.5"]',
@@ -51,7 +51,7 @@ Hpostdata = {
         'areacode' : '610118'
     }
 ```
-###更换打卡时间
+### 更换打卡时间
 这里设置的事早上6:30和中午12:00
 ```python
 if time_now == "06:30:10" or time_now == "06:30:11":#不知道是奇数还是偶数
