@@ -10,6 +10,8 @@
 
 ## 使用方法
 
+- 只需下载check.py即可
+
 ### 邮箱部分
 
 邮箱使用的网易的SMTP
@@ -60,7 +62,7 @@ if time_now == "06:30:10" or time_now == "06:30:11":#不知道是奇数还是偶
             subject = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + " 晨间打卡/健康"
             
         
-        if time_now == "11:20:10" or time_now == "11:20:11":
+if time_now == "11:20:10" or time_now == "11:20:11":
             NoonInspection()#午检
             subject = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + " 午检打卡"
 ```
