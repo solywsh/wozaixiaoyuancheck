@@ -16,10 +16,10 @@ console.setLevel(logging.INFO)
 logger.addHandler(console)
 
 mail_host = "smtp.163.com"        # SMTP服务器
-mail_user = "18111180869@163.com" # 用户名
-mail_pass = "QWRCXWKTJBBTDNAE"    # 授权密码，非登录密码 
-sender = '18111180869@163.com'    # 发件人邮箱
-receivers = ['someonelikeyouwsh@outlook.com']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
+mail_user = "@163.com" # 用户名
+mail_pass = ""    # 授权密码，非登录密码 
+sender = '@163.com'    # 发件人邮箱
+receivers = ['@outlook.com']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
 title = '我在校园自动打卡提醒'  # 邮件主题
 
 def sendEmail(content):
@@ -153,7 +153,7 @@ if __name__ == "__main__":
         time_now = time.strftime("%H:%M:%S", time.localtime()) # 刷新
         if time_now == "06:30:10" or time_now == "06:30:11":#不知道是奇数还是偶数
             HealthCheckIn()#健康打卡
-            MorningCheck()#晨间
+            MorningCheck()#晨检
             subject = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + " 晨间打卡/健康"
             
         
