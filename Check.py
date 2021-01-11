@@ -111,6 +111,7 @@ def MorningCheck():
     url = 'https://student.wozaixiaoyuan.com/heat/save.json'
     s = requests.session()
     r = s.post(url, data=Mpostdata, headers=headers)
+    t = r.text
       
 def NoonInspection():
     headers = {
@@ -141,6 +142,7 @@ def NoonInspection():
     url = 'https://student.wozaixiaoyuan.com/heat/save.json'
     s = requests.session()
     r = s.post(url, data=postdata, headers=headers)
+    t = r.text
     if t[8] == '0' :
         logger.info("午检打卡打卡")
     else:
