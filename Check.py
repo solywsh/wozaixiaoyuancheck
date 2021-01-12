@@ -144,6 +144,7 @@ def NoonInspection():
     r = s.post(url, data=postdata, headers=headers)
     t = r.text
     if t[8] == '0' :
+        sendEmail("午检打卡成功")
         logger.info("午检打卡打卡")
     else:
         sendEmail("token链接失效!请尽快重新输入")
