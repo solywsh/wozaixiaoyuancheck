@@ -29,10 +29,6 @@ def NoonInspection():
     url = 'https://student.wozaixiaoyuan.com/heat/save.json'
     s = requests.session()
     r = s.post(url, data=postdata, headers=headers)
-    t = r.text
-    print(t[8])
-    if t[8] == '0' :
-        print(t[8])
 
 if __name__ == "__main__":
     NoonInspection()

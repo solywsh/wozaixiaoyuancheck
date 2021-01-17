@@ -25,18 +25,10 @@ receivers = ['@outlook.com']  # 接收邮件
 title = '我在校园自动打卡提醒'  # 邮件主题
 ```
 ### 更换token
-将Token更换即可，总共需要更换三处，分别为晨检，午检，每日健康打卡
+将Token更换为自己的即可。后面统一更换。
+
 ```python 
-def HealthCheckIn():
-    headers = {
-        'content-length' : '296',
-        'cookie' : 'SESSION=NGY4ZGYwNGMtZTQ3ZC00ZDRmLTg2MmEtNDRhMDYyOTZlYTAw;path=/;HttpOnly',
-        'user-agent' : 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36 MicroMessenger/7.0.9.501 NetType/WIFI MiniProgramEnv/Windows WindowsWechat',
-        'content-type' : 'application/x-www-form-urlencoded',
-        'token' : '这里换为你的Token',
-        'refer' : 'https://servicewechat.com/wxce6d08f781975d91/143/page-frame.html',
-        'accept-encoding' : 'gzip, deflate, br'
-    }
+token_code = "93235013-73be-40c2-b2e7-2a0542d912bb" #这里把token_code的内容换为你自己的token
 ```
 ### 更换地址
 ```python 
