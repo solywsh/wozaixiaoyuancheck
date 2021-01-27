@@ -31,6 +31,9 @@ title = '我在校园自动打卡提醒'  # 邮件主题
 token_code = "93235013-73be-40c2-b2e7-2a0542d912bb" #这里把token_code的内容换为你自己的token
 ```
 ### 更换地址
+
+我在校园定位调用的腾讯地图的api，`https://apis.map.qq.com`。
+
 ```python 
 Hpostdata = {
         'answers' : '["0","36.5"]',
@@ -45,7 +48,23 @@ Hpostdata = {
         'areacode' : '610118'
     }
 ```
+在健康打卡`def HealthCheckIn(time)`中精度到行政区即可
+
+```python
+Hpostdata = {
+        'answers' : '["0","36.5"]',
+        'latitude' : '34.108216',
+        'longitude' : '108.605084',
+        'country' : '中国',
+        'city' : '西安市',
+        'district' : '鄠邑区',
+        'province' : '陕西省',
+        'areacode' : '610118'
+    }
+```
+
 ### 更换打卡时间
+
 这里设置的事早上6:30和中午12:00
 ```python
 if time_now == "06:30:10" or time_now == "06:30:11":#不知道是奇数还是偶数
