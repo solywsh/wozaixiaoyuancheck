@@ -64,10 +64,10 @@ def HealthCheckIn(time):
     t = r.text
     #经过测试，t返回的字典里会有一个状态码，登陆成功为0，不成功为-10，对应的就是第8个字符。
     if t[8] == '0' :
-        sendEmail("晨检、健康打卡打卡成功。\n"+time)
+        sendEmail("健康打卡打卡成功。\n"+time)
         logger.info("健康打卡成功\t"+t+"\t"+time)
     else:
-        sendEmail("晨检、健康打卡打卡失败!\n可能是token失效，请尽快重新输入。\n"+time)
+        sendEmail("健康打卡打卡失败!\n可能是token失效，请尽快重新输入。\n"+time)
         logger.warning("token失效\t"+t+"\t"+time)
     
 
