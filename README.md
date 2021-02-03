@@ -39,17 +39,11 @@ pushplus_token = '你的Token'
 
 ### 更换我在校园的token
 
-将Token更换为自己的即可。后面统一更换。
+将Token更换为自己的即可。后面几个函数自动统一更换。
 
 ```python 
-token_code = "93235013-73be-40c2-b2e7-2a0542d912bb" #这里把token_code的内容换为你自己的token
+wozaixiaoyuan_token = "93235013-73be-40c2-b2e7-2a0542d912bb"  #这里把token_code的内容换为你自己的token
 ```
-- 在`Check_pushplus.py`和`每日健康打卡_pushplus.py`命名为
-
-```python
-wozaixiaoyuan_token = "93235013-73be-40c2-b2e7-2a0542d912bb" 
-```
-
 ### 更换地址
 
 我在校园定位调用的腾讯地图的api，`https://apis.map.qq.com`。

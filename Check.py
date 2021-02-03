@@ -5,7 +5,7 @@ from email.header import Header
 from email.mime.text import MIMEText
 import logging
 
-token_code = "93235013-73be-40c2-b2e7-2a0542d912bb" 
+wozaixiaoyuan_token = "93235013-73be-40c2-b2e7-2a0542d912bb" 
 #这里把token_code的内容换为你自己的token，具体看https://violetwsh.com/2021/01/10/wozaixiaoyuan/#more
 
 logger = logging.getLogger(__name__)
@@ -45,7 +45,7 @@ def HealthCheckIn(time):
         'cookie' : 'SESSION=NGY4ZGYwNGMtZTQ3ZC00ZDRmLTg2MmEtNDRhMDYyOTZlYTAw;path=/;HttpOnly',
         'user-agent' : 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36 MicroMessenger/7.0.9.501 NetType/WIFI MiniProgramEnv/Windows WindowsWechat',
         'content-type' : 'application/x-www-form-urlencoded',
-        'token' : token_code,
+        'token' : wozaixiaoyuan_token,
         'refer' : 'https://servicewechat.com/wxce6d08f781975d91/143/page-frame.html',
         'accept-encoding' : 'gzip, deflate, br'
     }
@@ -79,7 +79,7 @@ def MorningCheck(time):
         'cookie' : 'SESSION=NGY4ZGYwNGMtZTQ3ZC00ZDRmLTg2MmEtNDRhMDYyOTZlYTAw;path=/;HttpOnly',
         'user-agent' : 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36 MicroMessenger/7.0.9.501 NetType/WIFI MiniProgramEnv/Windows WindowsWechat',
         'content-type' : 'application/x-www-form-urlencoded',
-        'token' : token_code,
+        'token' : wozaixiaoyuan_token,
         'refer' : 'https://servicewechat.com/wxce6d08f781975d91/143/page-frame.html',
         'accept-encoding' : 'gzip, deflate, br'
     }
@@ -110,7 +110,7 @@ def NoonInspection(time):
         'cookie' : 'SESSION=NGY4ZGYwNGMtZTQ3ZC00ZDRmLTg2MmEtNDRhMDYyOTZlYTAw;path=/;HttpOnly',
         'user-agent' : 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36 MicroMessenger/7.0.9.501 NetType/WIFI MiniProgramEnv/Windows WindowsWechat',
         'content-type' : 'application/x-www-form-urlencoded',
-        'token' : token_code,
+        'token' : wozaixiaoyuan_token,
         'refer' : 'https://servicewechat.com/wxce6d08f781975d91/143/page-frame.html',
         'accept-encoding' : 'gzip, deflate, br'
     }
