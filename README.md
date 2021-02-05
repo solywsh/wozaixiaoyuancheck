@@ -113,4 +113,37 @@ if time_now == "11:20:10" or time_now == "11:20:11":
             subject = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + " 午检打卡"
 ```
 
+## 班长特供版本
+
+此版本可以查到班级本天没有打卡的人，但是需要班长或者更高权限的人的token。
+
+班长版本提醒用的微信推送（需要使用邮箱提醒自行添加），使用方法和微信推送版本并没有差别。只需要填入班长的`我在校园的token`，希望收到消息的人的`pushplus token`
+
+```python
+#这里把_wozaixiaoyuan的内容换为你自己的token，自行抓包或者看https://violetwsh.com/2021/01/10/wozaixiaoyuan/#more
+wozaixiaoyuan_token = ""
+#自己的pushplus token，在pushplus网站中可以找到 http://pushplus.hxtrip.com/
+my_pushplus_token = ''
+#安全委员的pushplus token
+#safe_token = ''
+```
+
+### 给安全委员发消息
+
+有时候，你即使收到消息可能也会忘记提醒，这时需要其他人帮你，可以是安全委员或是其他任何人。只需要填入他的pushplus_token。
+
+```diff
+#取消注释并填入token
+#安全委员的pushplus token
+-#safe_token = ''
++safe_token = ''
+```
+
+在`classList (date)`函数末尾把对应的给取消注释
+
+```diff
+#给安全委员发一份
+-#pushplus_post("未打卡名单",list_name,safe_token)
++pushplus_post("未打卡名单",list_name,safe_token)
+```
 
