@@ -11,9 +11,32 @@
 ## 使用方法
 
 - 使用邮箱提醒
-  - 下载`check.py`(晨检，午检，每日打卡一起)或者`每日健康打卡.py`(只有每日健康打卡)。
+  - 下载`check.py`
 - 使用微信推送(推荐)
-  - 下载`Check_pushplus.py`(晨检，午检，每日打卡一起)或者`每日健康打卡_pushplus.py`(只有每日健康打卡)。
+  - 下载`Check_pushplus.py`
+
+### 启用对应功能
+
+默认只开启了健康打卡，由于在学校期间不需要晨检和午检，所以给注释掉了，想要打开是取消注释即可。
+
+```diff
+while True:
+        time_now = time.strftime("%H:%M:%S", time.localtime()) # 刷新
+        if time_now == "06:30:10" or time_now == "06:30:11":#不知道是奇数还是偶数
+            time_send = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+            HealthCheckIn(time_send)#健康打卡
+-           #MorningCheck(time_now)#晨检
++			#MorningCheck(time_now)#晨检
+            
+-        # if time_now == "11:20:10" or time_now == "11:20:11":
+-        #     time_send = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+-        #     NoonInspection(time_send)#午检
++        if time_now == "11:20:10" or time_now == "11:20:11":
++            time_send = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
++            NoonInspection(time_send)#午检
+            
+        time.sleep(2) # 停两秒
+```
 
 ### 邮箱部分
 
@@ -34,8 +57,6 @@ title = '我在校园自动打卡提醒'  # 邮件主题
 ```python
 pushplus_token = '你的Token'
 ```
-
-
 
 ### 更换我在校园的token
 
