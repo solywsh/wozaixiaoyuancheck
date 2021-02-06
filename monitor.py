@@ -44,7 +44,7 @@ def classList (date):
     for m in M:
         #查找带有name的列表，如"name":"张三"
         if m[1:5]=="name":
-            list_name = list_name + m.replace('"name":"','"')
+            list_name = list_name + m.replace('"name":','').replace('"','')
     #给我发一份
     pushplus_post("未打卡名单",list_name,my_pushplus_token)
     #给安全委员发一份
