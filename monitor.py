@@ -76,9 +76,9 @@ def HealthCheckIn(time):
     t = r.text
     #经过测试，t返回的字典里会有一个状态码，登陆成功为0，不成功为-10，对应的就是第8个字符。
     if t[8] == '0' :
-        pushplus_post("晨检，每日打卡提醒","打卡成功",pushplus_token)
+        pushplus_post("晨检，每日打卡提醒","打卡成功",my_pushplus_token)
     else:
-        pushplus_post("晨检，每日打卡提醒","打卡失败，可能是token失效，请尽快重新输入。",pushplus_token)
+        pushplus_post("晨检，每日打卡提醒","打卡失败，可能是token失效，请尽快重新输入。",my_pushplus_token)
     
 def MorningCheck(time):
     headers = {

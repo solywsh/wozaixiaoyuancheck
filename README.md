@@ -26,8 +26,8 @@ while True:
             time_send = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
             HealthCheckIn(time_send)#健康打卡
 -           #MorningCheck(time_now)#晨检
-+			#MorningCheck(time_now)#晨检
-            
++           #MorningCheck(time_now)#晨检
+      
 -        # if time_now == "11:20:10" or time_now == "11:20:11":
 -        #     time_send = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 -        #     NoonInspection(time_send)#午检
