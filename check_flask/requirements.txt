@@ -1,0 +1,8 @@
+flask
+flask_bootstrap
+flask_moment
+flask_wtf
+collections
+pathlib
+gevent
+requests

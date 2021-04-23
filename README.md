@@ -147,3 +147,32 @@ my_pushplus_token = ''
 +pushplus_post("未打卡名单",list_name,safe_token)
 ```
 
+# 新增网页部署，允许多个用户打卡
+
+> 由于性能原因，对flask做了一些限制，可通过修改一下内容进行解除。
+
+在`flaskrun.py`里找到装饰器`@app.route('/registered', methods=['GET', 'POST'])`的`def registered()`函数，里边有两个`if判断`:
+
+- 限制2019级计算机学院外的人进行注册
+
+```python
+if str(form.StuId.data[0:8]) != '20190707':
+            flash('该网站暂不对计算机学院2019级以外的人开放注册！')
+            return redirect(url_for('registered'))
+```
+
+- 限制一个班只有一个人注册
+
+```python
+flag = find(form.StuId.data)
+        if flag == 0:
+            flash('你们班已经有人注册！请联系管理员')
+            return redirect(url_for('registered'))
+```
+
+如果要解除限制，只需要注释掉即可。
+
+
+
+
+

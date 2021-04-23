@@ -1,0 +1,14 @@
+{
+    "csrf_token": "71c3567aa7b5007c8dd7e93da732471bcb84962a",
+    "name": "康宇",
+    "StuId": "201907070602",
+    "pwd": "05731X",
+    "WoZaiStudent_Token": "b744bb46-cda9-4b35-98f0-02eacffbf890",
+    "PushPlus_token": "20b6f3524430446197dc87c5122c8381",
+    "morning_check_self": true,
+    "afternoom_check_self": true,
+    "health_check_self": true,
+    "morning_check_class": true,
+    "afternoom_check_class": true,
+    "receive_message": true
+}
