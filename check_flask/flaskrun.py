@@ -50,7 +50,7 @@ class dataForm_index(FlaskForm):
     submit = SubmitField(u'提交')
   
 def file_add(new_stu_info):
-    path = r"config\id_" + new_stu_info['StuId']
+    path = r"config/id_" + new_stu_info['StuId']
     my_file = Path(path)
     if my_file.is_file():
         # 指定的文件存在
@@ -62,7 +62,7 @@ def file_add(new_stu_info):
         return 1
 
 def file_change(new_stu_info):
-    path = r"config\id_" + new_stu_info['StuId']
+    path = r"config/id_" + new_stu_info['StuId']
     my_file = Path(path)
     if my_file.is_file():
         # 指定的文件存在
@@ -86,7 +86,7 @@ def file_change(new_stu_info):
 
 
 def file_read(StuId):
-    path = r"config\id_" + StuId
+    path = r"config/id_" + StuId
     my_file = Path(path)
     if my_file.is_file():
         # 指定的文件存在
@@ -228,6 +228,49 @@ def registered():
         
 
     return render_template('reg.html', form=form, name = session.get('name'))
+
+
+@app.route('/foryb', methods=['GET', 'POST'])
+def foryb():
+    form = dataForm_reg()
+    
+    if form.validate_on_submit():
+        # #对学号进行检查
+        # if str(form.StuId.data[0:8]) != '20190707':
+        #     flash('该网站暂不对计算机学院2019级以外的人开放注册！')
+        #     return redirect(url_for('registered'))
+
+        # #查找已经注册过的学号
+        # flag = find(form.StuId.data)
+        # if flag == 0:
+        #     flash('你们班已经有人注册！请联系管理员')
+        #     return redirect(url_for('registered'))
+
+        session['name'] = form.name.data
+        session['StuId'] = form.StuId.data
+        session['pwd'] = form.pwd.data
+        session['WoZaiStudent_Token'] = form.WoZaiStudent_Token.data
+        session['PushPlus_token'] = form.PushPlus_token.data
+        session['morning_check_self'] = form.morning_check_self.data
+        session['afternoom_check_self'] = form.afternoom_check_self.data
+        session['health_check_self'] = form.health_check_self.data
+        session['morning_check_class'] = form.morning_check_class.data
+        session['afternoom_check_class'] = form.afternoom_check_class.data
+        session['receive_message'] = form.receive_message.data
+        #session['health_check_class'] = form.health_check_class.data
+        user_dict = ast.literal_eval(str(session).replace('<','').replace('>','').replace('SecureCookieSession ',''))
+        
+        #检查完成
+        flag = file_add(user_dict)
+        if flag:
+            flash('注册成功！！！')
+            return redirect(url_for('index'))
+        else:
+            flash('注册失败，已经有相同的人注册了你的信息。')
+            return redirect(url_for('foryb'))
+        
+
+    return render_template('foryb.html', form=form, name = session.get('name'))
 
 
 

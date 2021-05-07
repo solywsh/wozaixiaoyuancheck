@@ -210,7 +210,7 @@ def HealthCheckIn(token, pushplus_token, send):
     url = 'https://student.wozaixiaoyuan.com/health/save.json'
     url1 = 'https://student.wozaixiaoyuan.com/health/getToday.json'
     s = requests.session()
-    r1 = s.post(url1, data=Hpostdata,headers=headers)
+    r1 = s.post(url1, headers=headers)
     t1 = r1.text
     dic = json.loads(t1)
     if dic['code'] == 0:
@@ -224,7 +224,7 @@ def HealthCheckIn(token, pushplus_token, send):
                 if t[8] == '0' :
                     # print("健康打卡成功！")
                     pushplus_post("每日打卡提醒","打卡成功",pushplus_token)
-    else:
+    elif dic['code'] == -1:
         if token in invalid_token:
             return
         else:
@@ -267,7 +267,7 @@ def MorningCheck(token, pushplus_token, send):
                 if t[8] == '0' :
                     # print("健康打卡成功！")
                     pushplus_post("晨检打卡提醒","打卡成功",pushplus_token)
-    else:
+    elif dic['code'] == -1:
         if token in invalid_token:
             return
         else:
@@ -300,7 +300,7 @@ def NoonInspection(token, pushplus_token, send):
     r1 = s.post(url1, data=postdata,headers=headers)
     t1 = r1.text
     dic = json.loads(t1)
-    print('运行正常')
+    #print('运行正常')
     if dic['code'] == 0:
         checked = dic['data']['titles'][0]['heatOptions'][0]['select'] #是否已打卡
         if checked:
@@ -312,7 +312,7 @@ def NoonInspection(token, pushplus_token, send):
                 if t[8] == '0' :
                     # print("健康打卡成功！")
                     pushplus_post("午检打卡提醒","打卡成功",pushplus_token)
-    else:
+    elif dic['code'] == -1:
         if token in invalid_token:
             return
         else:
@@ -397,10 +397,11 @@ if __name__ == "__main__":
         hour_now = int(time.strftime("%H", time.localtime())) # 刷新
         min_now = int(time.strftime("%M", time.localtime()))
         time_now = time.strftime("%H:%M", time.localtime())
-        if time_now == "23:58" or time_now == "23:59":
+        time_now_with_sec = time.strftime("%H:%M:%S", time.localtime())
+        if time_now_with_sec == "23:58:00" or time_now_with_sec == "23:59:00":
             invalid_token.clear()
         if time_now == "10:01" or time_now == "10:02" or time_now == "15:01" or time_now == "15:02":
             user_sent.clear()
-        print('运行正常')
+        #print('运行正常')
         check(hour_now, min_now)
         time.sleep(2) # 停两秒
