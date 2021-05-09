@@ -25,12 +25,14 @@ class dataForm_reg(FlaskForm):
     pwd = PasswordField('请输入你的密码：', validators=[DataRequired()])
     WoZaiStudent_Token = StringField('请输入你的“我在校园”token：', validators=[DataRequired()])
     PushPlus_token = StringField('请输入你的“PushPlus”token：', validators=[DataRequired()])
-    morning_check_self = BooleanField('给自己晨检打卡')
-    afternoom_check_self = BooleanField('给自己午检打卡')
-    health_check_self = BooleanField('给自己健康打卡')
-    morning_check_class = BooleanField('给班里的同学晨检查打卡')
-    afternoom_check_class = BooleanField('给班里的同学午检查打卡')
+    #morning_check_self = BooleanField('给自己晨检打卡')
+    #afternoon_check_self = BooleanField('给自己午检打卡')
+    night_check_self = BooleanField('给自己晚检打卡')
+    #health_check_self = BooleanField('给自己健康打卡')
+    #morning_check_class = BooleanField('给班里的同学晨检查打卡')
+    #afternoon_check_class = BooleanField('给班里的同学午检查打卡')
     #health_check_class = BooleanField('给班里的同学健康查打卡')
+    night_check_class = BooleanField('给班里的同学晚检打卡')
     receive_message =  BooleanField('接收班级未打卡名单')
 
     submit = SubmitField(u'提交')
@@ -39,11 +41,13 @@ class dataForm_index(FlaskForm):
     StuId = StringField('请输入你的学号：', validators=[DataRequired()])
     pwd = PasswordField('请输入你的密码：', validators=[DataRequired()])
     WoZaiStudent_Token = StringField('请输入你的“我在校园”token：', validators=[DataRequired()])
-    morning_check_self = BooleanField('给自己晨检打卡')
-    afternoom_check_self = BooleanField('给自己午检打卡')
-    health_check_self = BooleanField('给自己健康打卡')
-    morning_check_class = BooleanField('给班里的同学晨检查打卡')
-    afternoom_check_class = BooleanField('给班里的同学午检查打卡')
+    #morning_check_self = BooleanField('给自己晨检打卡')
+    #afternoon_check_self = BooleanField('给自己午检打卡')
+    night_check_self = BooleanField('给自己晚检打卡')
+    #health_check_self = BooleanField('给自己健康打卡')
+    #morning_check_class = BooleanField('给班里的同学晨检查打卡')
+    #afternoon_check_class = BooleanField('给班里的同学午检查打卡')
+    night_check_class = BooleanField('给班里的同学晚检打卡')
     receive_message =  BooleanField('接收班级未打卡名单')
     #health_check_class = BooleanField('给班里的同学健康查打卡')
 
@@ -68,12 +72,18 @@ def file_change(new_stu_info):
         # 指定的文件存在
         old_stu_info = file_read(new_stu_info['StuId'])
         if old_stu_info != 0:
+            #给session赋值，避免在不同设备识别不了姓名的情况
+            session['name'] = old_stu_info['name']
+
             old_stu_info['WoZaiStudent_Token'] = new_stu_info['WoZaiStudent_Token']
-            old_stu_info['morning_check_self'] = new_stu_info['morning_check_self']
-            old_stu_info['afternoom_check_self'] = new_stu_info['afternoom_check_self']
-            old_stu_info['health_check_self'] = new_stu_info['health_check_self']
-            old_stu_info['morning_check_class'] = new_stu_info['morning_check_class']
-            old_stu_info['afternoom_check_class'] = new_stu_info['afternoom_check_class']
+            old_stu_info['night_check_self'] = new_stu_info['night_check_self']
+            #old_stu_info['morning_check_self'] = new_stu_info['morning_check_self']
+            #old_stu_info['afternoon_check_self'] = new_stu_info['afternoon_check_self']
+            #old_stu_info['health_check_self'] = new_stu_info['health_check_self']
+            #old_stu_info['morning_check_class'] = new_stu_info['morning_check_class']
+            #old_stu_info['afternoon_check_class'] = new_stu_info['afternoon_check_class']
+            #old_stu_info['afternoon_check_class'] = new_stu_info['afternoon_check_class']
+            old_stu_info['night_check_class'] = new_stu_info['night_check_class']
             old_stu_info['receive_message'] = new_stu_info['receive_message']
             with open(path, 'w', encoding='utf-8') as f:
                 f.write(json.dumps(old_stu_info, indent=4, ensure_ascii=False))
@@ -161,11 +171,15 @@ def index():
             session['StuId'] = form.StuId.data
             session['pwd'] = form.pwd.data
             session['WoZaiStudent_Token'] = form.WoZaiStudent_Token.data
-            session['morning_check_self'] = form.morning_check_self.data
-            session['afternoom_check_self'] = form.afternoom_check_self.data
-            session['health_check_self'] = form.health_check_self.data
-            session['morning_check_class'] = form.morning_check_class.data
-            session['afternoom_check_class'] = form.afternoom_check_class.data
+            #session['morning_check_self'] = form.morning_check_self.data
+            #session['afternoon_check_self'] = form.afternoon_check_self.data
+            #session['health_check_self'] = form.health_check_self.data
+
+            #session['morning_check_class'] = form.morning_check_class.data
+            #session['afternoon_check_class'] = form.afternoon_check_class.data
+            session['night_check_self'] = form.night_check_self.data
+            session['night_check_class'] = form.night_check_class.data
+
             session['receive_message'] = form.receive_message.data
             #session['health_check_class'] = form.health_check_class.data
             
@@ -208,11 +222,14 @@ def registered():
         session['pwd'] = form.pwd.data
         session['WoZaiStudent_Token'] = form.WoZaiStudent_Token.data
         session['PushPlus_token'] = form.PushPlus_token.data
-        session['morning_check_self'] = form.morning_check_self.data
-        session['afternoom_check_self'] = form.afternoom_check_self.data
-        session['health_check_self'] = form.health_check_self.data
-        session['morning_check_class'] = form.morning_check_class.data
-        session['afternoom_check_class'] = form.afternoom_check_class.data
+        #session['morning_check_self'] = form.morning_check_self.data
+        #session['afternoon_check_self'] = form.afternoon_check_self.data
+        #session['health_check_self'] = form.health_check_self.data
+        #session['morning_check_class'] = form.morning_check_class.data
+        #session['afternoon_check_class'] = form.afternoon_check_class.data
+        session['night_check_self'] = form.night_check_self.data
+        session['night_check_class'] = form.night_check_class.data
+
         session['receive_message'] = form.receive_message.data
         #session['health_check_class'] = form.health_check_class.data
         user_dict = ast.literal_eval(str(session).replace('<','').replace('>','').replace('SecureCookieSession ',''))
@@ -251,11 +268,14 @@ def foryb():
         session['pwd'] = form.pwd.data
         session['WoZaiStudent_Token'] = form.WoZaiStudent_Token.data
         session['PushPlus_token'] = form.PushPlus_token.data
-        session['morning_check_self'] = form.morning_check_self.data
-        session['afternoom_check_self'] = form.afternoom_check_self.data
-        session['health_check_self'] = form.health_check_self.data
-        session['morning_check_class'] = form.morning_check_class.data
-        session['afternoom_check_class'] = form.afternoom_check_class.data
+        
+        #session['morning_check_self'] = form.morning_check_self.data
+        #session['afternoon_check_self'] = form.afternoon_check_self.data
+        #session['health_check_self'] = form.health_check_self.data
+        #session['morning_check_class'] = form.morning_check_class.data
+        #session['afternoon_check_class'] = form.afternoon_check_class.data
+        session['night_check_self'] = form.night_check_self.data
+        session['night_check_class'] = form.night_check_class.data
         session['receive_message'] = form.receive_message.data
         #session['health_check_class'] = form.health_check_class.data
         user_dict = ast.literal_eval(str(session).replace('<','').replace('>','').replace('SecureCookieSession ',''))

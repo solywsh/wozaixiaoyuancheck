@@ -1,0 +1,11 @@
+{
+    "csrf_token": "35c6b6cd791687a6bc8daf548c8ed39be0b070f4",
+    "name": "王世浩",
+    "StuId": "201907071004",
+    "pwd": "123",
+    "WoZaiStudent_Token": "5ae71543-56f8-40ac-b747-503d1835e3c",
+    "PushPlus_token": "a6265a189e994e74bf6ab24587bb8891",
+    "night_check_self": true,
+    "night_check_class": true,
+    "receive_message": true
+}

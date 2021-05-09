@@ -22,24 +22,33 @@ def check(hour_now, min_now):
     for file in files:
         with open(path + file,"r", encoding='utf-8') as f:
             info_dict = json.load(f)
-            if (hour_now >= 0) and (info_dict['health_check_self']):
-                HealthCheckIn(info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'], info_dict['receive_message'])#健康打卡
-            if hour_now >= 6 and hour_now <= 10:
-                if info_dict['morning_check_self']:
-                    MorningCheck(info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'], info_dict['receive_message'])#晨检
-            if (info_dict['morning_check_class']) and ((hour_now==9)and(min_now>=40)):
+            # if (hour_now >= 0) and (info_dict['health_check_self']):
+            #     HealthCheckIn(info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'], info_dict['receive_message'])#健康打卡
+            # if hour_now >= 6 and hour_now <= 10:
+            #     if info_dict['morning_check_self']:
+            #         MorningCheck(info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'], info_dict['receive_message'])#晨检
+            # if (info_dict['morning_check_class']) and ((hour_now==9)and(min_now>=40)):
+            #         time_data = time.strftime("%Y%m%d")
+            #         Unchecked_list_morning(time_data, info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'])
+            #         time.sleep(5)#暂停等待更新名单
+            #         Unchecked_list_morning(time_data, info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'])#检查两次，会出现第一次打卡不完整的情况
+            # if hour_now >= 11 and hour_now <= 15:
+            #     if info_dict['afternoom_check_self']:
+            #         NoonInspection(info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'], info_dict['receive_message'])#午检
+            # if (info_dict['afternoom_check_class']) and ((hour_now==14)and(min_now>=40)):
+            #         time_data = time.strftime("%Y%m%d")
+            #         Unchecked_list_afternoon(time_data, info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'])
+            #         time.sleep(5)#暂停等待更新名单
+            #         Unchecked_list_afternoon(time_data, info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'])
+            if hour_now >= 21:
+                if (hour_now == 23 and min_now <= 30) or hour_now <= 22:
+                    if info_dict['night_check_self']:
+                        NightCheckIn(info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'], info_dict['receive_message'])#晚检
+            if (info_dict['night_check_class']) and ((hour_now==23)and(min_now>=10)):
                     time_data = time.strftime("%Y%m%d")
-                    Unchecked_list_morning(time_data, info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'])
+                    Unchecked_list_night(time_data, info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'])
                     time.sleep(5)#暂停等待更新名单
-                    Unchecked_list_morning(time_data, info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'])#检查两次，会出现第一次打卡不完整的情况
-            if hour_now >= 11 and hour_now <= 15:
-                if info_dict['afternoom_check_self']:
-                    NoonInspection(info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'], info_dict['receive_message'])#午检
-            if (info_dict['afternoom_check_class']) and ((hour_now==14)and(min_now>=40)):
-                    time_data = time.strftime("%Y%m%d")
-                    Unchecked_list_afternoon(time_data, info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'])
-                    time.sleep(5)#暂停等待更新名单
-                    Unchecked_list_afternoon(time_data, info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'])
+                    Unchecked_list_night(time_data, info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'])
         f.close()
 
 
@@ -54,6 +63,94 @@ def pushplus_post(title,content,token):
     body=json.dumps(data).encode(encoding='utf-8')
     headers = {'Content-Type':'application/json'}
     requests.post(url,data=body,headers=headers)
+    
+def NightCheckIn(token, pushplus_token, send):
+    headers = {
+        'token' : token,
+    }
+    Mpostdata = {
+        'answers' : '["0"]',
+        'seq' : '3',
+        'temperature' : '36.5',
+        'userid' : '',
+        'latitude' : '34.108216',
+        'longitude' : '108.605084',
+        'country' : '中国',
+        'city' : '西安市',
+        'district' : '鄠邑区',
+        'province' : '陕西省',
+        'township' : '甘亭街道',
+        'street' : '东街',
+        'myArea' : '610118'
+    }
+    url = 'https://student.wozaixiaoyuan.com/heat/save.json'
+    url1 = 'https://student.wozaixiaoyuan.com/heat/getHeat.json'
+    s = requests.session()
+    r1 = s.post(url1, data=Mpostdata,headers=headers)
+    t1 = r1.text
+    dic = json.loads(t1)
+    if dic['code'] == 0:
+        checked = dic['data']['titles'][0]['heatOptions'][0]['select'] #是否已打卡
+        if checked:
+            return
+        else:
+            r = s.post(url, data=Mpostdata,headers=headers)
+            t = r.text
+            code = json.loads(t)
+            if send:
+                if code['code'] == '0':
+                    pushplus_post("晚检打卡提醒","打卡成功",pushplus_token)
+    elif dic['code'] == -1:
+        if token in invalid_token:
+            return
+        else:
+            invalid_token.append(token)
+            pushplus_post("晚检打卡提醒","打卡失败，可能是token失效，请尽快重新输入。",pushplus_token)
+            
+def Unchecked_list_night(date, token, pushplus_token):
+    headers = {
+        'token' : token,
+    }
+    Hpostdata = {
+        'seq':'3',
+        'date':date,
+        'type':'0'
+    }
+    url = 'https://student.wozaixiaoyuan.com/heat/getHeatUsers.json'
+    s = requests.session()
+    r = s.post(url, data=Hpostdata,headers=headers)
+
+    #字符转字典的另外一种方法
+    # ts = ast.literal_eval(r.text)
+    # print(type(ts))
+
+    ts = json.loads(r.text)#转为字典
+    if ts['code'] != -10:
+        phone_list=[]
+        name_list=''
+        for t in ts['data']:
+            phone_list.append('+86'+t['phone'])
+            name_list = name_list + t['name']+' '
+            print(t['name']+':'+t['userId'])
+            MorningCheck_for_classmate(t['userId'], token)
+            #yiban_send_msg(t['number'] , 1)
+            time.sleep(2)
+        #短信发送
+        #sent_msg(phone_list)
+        #给我发一份
+        if token in user_sent:
+            return
+        else:
+            user_sent.append(token)
+            pushplus_post("晚检未打卡名单",name_list,pushplus_token)
+        #给安全委员发一份
+        #pushplus_post("晨检未打卡名单",name_list,safe_token)
+    else:
+        if token in invalid_token:
+            return
+        else:
+            invalid_token.append(token)
+            pushplus_post("晚检未打卡名单","Token失效！",pushplus_token)
 
 # def Unchecked_list_health(date):
 #     headers = {
