@@ -2,8 +2,8 @@ Traceback (most recent call last):
   File "/www/wwwroot/check_flask/app/Check.py", line 354, in <module>
     check(hour_now, min_now)
   File "/www/wwwroot/check_flask/app/Check.py", line 23, in check
-    HealthCheckIn(info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'], info_dict['receive_message'])#健康打卡
-  File "/www/wwwroot/check_flask/app/Check.py", line 197, in HealthCheckIn
+    health_check_in(info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'], info_dict['receive_message'])#健康打卡
+  File "/www/wwwroot/check_flask/app/Check.py", line 197, in health_check_in
     checked = dic['data']['titles'][0]['heatOptions'][0]['select'] #是否已打卡
 KeyError: 'data'
 hello

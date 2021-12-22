@@ -124,10 +124,10 @@ if __name__ == "__main__":
         if time_now == "06:30:10" or time_now == "06:30:11":#不知道是奇数还是偶数
             time_send = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
             HealthCheckIn(time_send)#健康打卡
-            # MorningCheck(time_now)#晨检
+            # morning_check(time_now)#晨检
             
         # if time_now == "11:20:10" or time_now == "11:20:11":
         #     time_send = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-        #     NoonInspection(time_send)#午检
+        #     noon_inspection(time_send)#午检
             
         time.sleep(2) # 停两秒

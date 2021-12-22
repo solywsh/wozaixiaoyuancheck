@@ -1,0 +1,7 @@
+
+vpython:S117"ZRename this local variable "Hpostdata" to match the regular expression ^[_a-z][a-z0-9_]*$.(ÞŸôìûÿÿÿÿ
+kpython:S1542"SRename function "HealthCheckIn" to match the regular expression ^[a-z_][a-z0-9_]*$.(¿¥¢Ü
+=python:S1481#"%Remove the unused local variable "r".(Ù¾êù
+qpython:S1170"ZRename this local variable "Mpostdata" to match the regular expression ^[_a-z][a-z0-9_]*$.(ð­Ô¿
+jpython:S1542&"RRename function "MorningCheck" to match the regular expression ^[a-z_][a-z0-9_]*$.(÷êËÆ
+Bpython:S1481A"%Remove the unused local variable "r".(û˜îªüÿÿÿÿ

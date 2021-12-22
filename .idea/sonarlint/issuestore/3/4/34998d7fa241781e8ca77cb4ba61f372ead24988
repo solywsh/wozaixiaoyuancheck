@@ -1,0 +1,24 @@
+
+dpython:S11929"LDefine a constant instead of duplicating this literal r"config/id_" 3 times.(ï©óø
+npython:S1192º"UDefine a constant instead of duplicating this literal 'SecureCookieSession ' 3 times.(†Ù’«
+‚python:S101"fRename class "dataForm_reg" to match the regular expression ^_?([A-Z_][a-zA-Z0-9]*|[a-z_][a-z0-9_]*)$.(…˜”Øùÿÿÿÿ
+;python:S125"Remove this commented out code.(«Ê—ùÿÿÿÿ
+;python:S125"Remove this commented out code.(Ó¥éüÿÿÿÿ
+„python:S101("hRename class "dataForm_index" to match the regular expression ^_?([A-Z_][a-zA-Z0-9]*|[a-z_][a-z0-9_]*)$.(šé…Êùÿÿÿÿ
+;python:S125,"Remove this commented out code.(«Ê—ùÿÿÿÿ
+;python:S125/"Remove this commented out code.(Ó¥éüÿÿÿÿ
+;python:S1254"Remove this commented out code.(ãúæ”ûÿÿÿÿ
+;python:S125P"Remove this commented out code.(êˆê€şÿÿÿÿ
+hpython:S117b"QRename this parameter "StuId" to match the regular expression ^[_a-z][a-z0-9_]*$.(ÌÎ˜œ
+epython:S117z"NRename this parameter "Id" to match the regular expression ^[_a-z][a-z0-9_]*$.(†¯›
+„python:S117¨"gRename this local variable "old_WoZaiStudent_Token" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ù”¸úÿÿÿÿ
+<python:S125®"Remove this commented out code.(È‚ğÙıÿÿÿÿ
+6python:S125²"Remove this commented out code.(Åµ5
+<python:S125¸"Remove this commented out code.(–Æ¬¼ûÿÿÿÿ
+<python:S125á"Remove this commented out code.(È‚ğÙıÿÿÿÿ
+<python:S125ê"Remove this commented out code.(–Æ¬¼ûÿÿÿÿ
+7python:S125ÿ"Remove this commented out code.(äÁÜ
+<python:S125„"Remove this commented out code.(Ñûïóüÿÿÿÿ
+<python:S125"Remove this commented out code.(È‚ğÙıÿÿÿÿ
+<python:S125˜"Remove this commented out code.(–Æ¬¼ûÿÿÿÿ
+<python:S125­"Remove this commented out code.(¿œØóûÿÿÿÿ

@@ -23,23 +23,23 @@ def check(hour_now, min_now):
         with open(path + file,"r", encoding='utf-8') as f:
             info_dict = json.load(f)
             # if (hour_now >= 0) and (info_dict['health_check_self']):
-            #     HealthCheckIn(info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'], info_dict['receive_message'])#健康打卡
+            #     health_check_in(info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'], info_dict['receive_message'])#健康打卡
             # if hour_now >= 6 and hour_now <= 10:
             #     if info_dict['morning_check_self']:
-            #         MorningCheck(info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'], info_dict['receive_message'])#晨检
+            #         morning_check(info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'], info_dict['receive_message'])#晨检
             # if (info_dict['morning_check_class']) and ((hour_now==9)and(min_now>=40)):
             #         time_data = time.strftime("%Y%m%d")
-            #         Unchecked_list_morning(time_data, info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'])
+            #         unchecked_list_morning(time_data, info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'])
             #         time.sleep(5)#暂停等待更新名单
-            #         Unchecked_list_morning(time_data, info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'])#检查两次，会出现第一次打卡不完整的情况
+            #         unchecked_list_morning(time_data, info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'])#检查两次，会出现第一次打卡不完整的情况
             # if hour_now >= 11 and hour_now <= 15:
             #     if info_dict['afternoom_check_self']:
-            #         NoonInspection(info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'], info_dict['receive_message'])#午检
+            #         noon_inspection(info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'], info_dict['receive_message'])#午检
             # if (info_dict['afternoom_check_class']) and ((hour_now==14)and(min_now>=40)):
             #         time_data = time.strftime("%Y%m%d")
-            #         Unchecked_list_afternoon(time_data, info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'])
+            #         unchecked_list_afternoon(time_data, info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'])
             #         time.sleep(5)#暂停等待更新名单
-            #         Unchecked_list_afternoon(time_data, info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'])
+            #         unchecked_list_afternoon(time_data, info_dict['WoZaiStudent_Token'], info_dict['PushPlus_token'])
             if hour_now >= 21:
                 if (hour_now == 23 and min_now <= 30) or hour_now <= 22:
                     if info_dict['night_check_self']:
@@ -152,7 +152,7 @@ def Unchecked_list_night(date, token, pushplus_token):
             invalid_token.append(token)
             pushplus_post("晚检未打卡名单","Token失效！",pushplus_token)
 
-# def Unchecked_list_health(date):
+# def unchecked_list_health(date):
 #     headers = {
 #         'token' : wozaixiaoyuan_token,
 #     }

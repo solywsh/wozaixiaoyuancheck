@@ -1,0 +1,45 @@
+
+—python:S1192l"Define a constant instead of duplicating this literal "æ‰“å¡å¤±è´¥ï¼Œå¯èƒ½æ˜¯tokenå¤±æ•ˆï¼Œè¯·å°½å¿«é‡æ–°è¾“å…¥ã€‚" 4 times.(°İ÷Ÿ
+hpython:S1192™"ODefine a constant instead of duplicating this literal "Tokenå¤±æ•ˆï¼" 3 times.(ÓÍÒ³
+€python:S1192æ"bDefine a constant instead of duplicating this literal 'application/x-www-form-urlencoded' 3 times.(’ˆ×‡øÿÿÿÿ
+kpython:S1192é"RDefine a constant instead of duplicating this literal 'gzip, deflate, br' 3 times.(œûà›
+Œpython:S1192W"tDefine a constant instead of duplicating this literal 'https://student.wozaixiaoyuan.com/heat/getHeat.json' 3 times.(üé§Ç
+python:S1192V"qDefine a constant instead of duplicating this literal 'https://student.wozaixiaoyuan.com/heat/save.json' 5 times.(ÇóÖşÿÿÿÿ
+‘python:S1192w"yDefine a constant instead of duplicating this literal 'https://student.wozaixiaoyuan.com/heat/getHeatUsers.json' 3 times.( ğÉ
+Lpython:S1066,"/Merge this if statement with the enclosing one.(öµÂäûÿÿÿÿ
+Gpython:S1066-"/Merge this if statement with the enclosing one.(¶—ÿ‚
+Lpython:S1066e"/Merge this if statement with the enclosing one.(Ş»êêúÿÿÿÿ
+Hpython:S1066Á"/Merge this if statement with the enclosing one.(Ö§‡à
+Hpython:S1066ì"/Merge this if statement with the enclosing one.(Ö§‡à
+Hpython:S1066™"/Merge this if statement with the enclosing one.(Ö§‡à
+6python:S125"Remove this commented out code.(„Ó°ò
+6python:S125"Remove this commented out code.(œêîÄ
+qpython:S117G"ZRename this local variable "Mpostdata" to match the regular expression ^[_a-z][a-z0-9_]*$.(ğ­Ô¿
+opython:S1542C"RRename function "NightCheckIn" to match the regular expression ^[a-z_][a-z0-9_]*$.(•±À§ûÿÿÿÿ
+vpython:S117r"ZRename this local variable "Hpostdata" to match the regular expression ^[_a-z][a-z0-9_]*$.(ŞŸôìûÿÿÿÿ
+rpython:S1542n"ZRename function "Unchecked_list_night" to match the regular expression ^[a-z_][a-z0-9_]*$.(Î¥¸Ì
+;python:S125{"Remove this commented out code.(ÜÑÓøÿÿÿÿ
+7python:S125Š"Remove this commented out code.(ÑŞ§Ú
+<python:S125’"Remove this commented out code.(Œòíşÿÿÿÿ
+7python:S125›"Remove this commented out code.(ê…½ş
+wpython:S117¸"ZRename this local variable "Hpostdata" to match the regular expression ^[_a-z][a-z0-9_]*$.(ŞŸôìûÿÿÿÿ
+zpython:S1542´"\Rename function "Unchecked_list_morning" to match the regular expression ^[a-z_][a-z0-9_]*$.(†Ì°üÿÿÿÿ
+<python:S125Á"Remove this commented out code.(ÜÑÓøÿÿÿÿ
+7python:S125Ğ"Remove this commented out code.(ÑŞ§Ú
+<python:S125Ø"Remove this commented out code.(Œòíşÿÿÿÿ
+wpython:S117ë"ZRename this local variable "Hpostdata" to match the regular expression ^[_a-z][a-z0-9_]*$.(ŞŸôìûÿÿÿÿ
+wpython:S1542á"^Rename function "Unchecked_list_afternoon" to match the regular expression ^[a-z_][a-z0-9_]*$.(Ê“½“
+7python:S125ş"Remove this commented out code.(ÑŞ§Ú
+<python:S125†"Remove this commented out code.(Œòíşÿÿÿÿ
+7python:S125"Remove this commented out code.(õ«Š“
+wpython:S117§"ZRename this local variable "Hpostdata" to match the regular expression ^[_a-z][a-z0-9_]*$.(ŞŸôìûÿÿÿÿ
+lpython:S1542£"SRename function "HealthCheckIn" to match the regular expression ^[a-z_][a-z0-9_]*$.(ğÊ—Ø
+rpython:S117Ï"ZRename this local variable "Mpostdata" to match the regular expression ^[_a-z][a-z0-9_]*$.(ğ­Ô¿
+ppython:S1542Ë"RRename function "MorningCheck" to match the regular expression ^[a-z_][a-z0-9_]*$.(°Ï™øÿÿÿÿ
+rpython:S1542ö"TRename function "NoonInspection" to match the regular expression ^[a-z_][a-z0-9_]*$.(ôÖó·ıÿÿÿÿ
+~python:S1542£"`Rename function "MorningCheck_for_classmate" to match the regular expression ^[a-z_][a-z0-9_]*$.(øŞ„ùÿÿÿÿ
+>python:S1481Å"%Remove the unused local variable "r".(«­±’
+<python:S125²"Remove this commented out code.(ÓÑˆšúÿÿÿÿ
+{python:S1542Ç"bRename function "AfternoonCheck_for_classmate" to match the regular expression ^[a-z_][a-z0-9_]*$.(¤âÍì
+>python:S1481ê"%Remove the unused local variable "r".(«­±’
+<python:S125×"Remove this commented out code.(ÓÑˆšúÿÿÿÿ
