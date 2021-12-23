@@ -10,7 +10,7 @@ import requests
 # 自己的pushplus token，在pushplus网站中可以找到 http://pushplus.hxtrip.com/
 pushplus_token = ''
 jwsession = ""
-user_agent = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36 MicroMessenger/7.0.9.501 NetType/WIFI MiniProgramEnv/Windows WindowsWechat'
+user_agent = 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.16(0x1800103a) NetType/WIFI Language/zh_CN'
 
 
 def pushplus_post(title, content):
@@ -97,7 +97,6 @@ def unchecked_list_afternoon(date):
             phone_list.append('+86' + t['phone'])
             name_list = name_list + t['name'] + ' '
             print(t['name'] + ':' + t['userId'] + ' ' + t['number'])
-            # yiban_send_msg(t['number'],2)
             afternoon_check_for_classmate(t['userId'])
             time.sleep(2)
         pushplus_post("班级午检未打卡提醒", "未打卡名单:" + name_list)
