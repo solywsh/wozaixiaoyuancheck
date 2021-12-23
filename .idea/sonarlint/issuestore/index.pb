@@ -1,8 +1,6 @@
 
 R
 "check_flask/config/id_201907071004,8\1\818e45d91259ec1a0ce5c2f06ffa815cd50a946a
-G
-脚本/requirements.txt,a\c\acf3593aba93fedc9803d511cf58f4b2fbdefc6b
 H
 check_flask/app/Check.py,6\7\671750cdecd04faa568d89d4991d4cf1feb3aebf
 H
@@ -17,9 +15,9 @@ O
 脚本/我在校园午签到.py,0\3\035375082feca4d2f054ce1bcd2c84f0dd998d23
 9
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
-L
-脚本/晚上定位签到.py,d\6\d69fc4097879ed19fc01933c7b01a2d4c468d8d7
 S
 #脚本/晚上定位签到_班级.py,2\d\2d29b533fae1cb8fc1fe67cbe6ccc0d6f59136ad
+L
+脚本/晚上定位签到.py,d\6\d69fc4097879ed19fc01933c7b01a2d4c468d8d7
 C
 脚本/check_all.py,5\d\5d718a7be966a145d168547802e6f03416f5bec0
