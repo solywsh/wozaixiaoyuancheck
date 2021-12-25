@@ -489,10 +489,11 @@ def main():
         # 晨检
         if time_now == morning_check_time or time_now == _morning_check_time:
             morning_check()
+            time.sleep(2)
         # 午检
         if time_now == afternoon_check_time or time_now == _afternoon_check_time:
             noon_inspection()
-
+            time.sleep(2)
         # # 晨检未打卡名单并提醒
         # if time_now == "09:50:00" or time_now == "09:50:01":
         #     time_data = time.strftime("%Y%m%d")
