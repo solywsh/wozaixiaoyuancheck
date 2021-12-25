@@ -11,8 +11,8 @@ import requests
 
 
 # 自己的pushplus token，在pushplus网站中可以找到 http://pushplus.hxtrip.com/
-pushplus_token = "a6265a189e994e74bf6ab24587bb8891"
-jwsession = "a6db5878f72d4771a998a39c8139cfc8"
+pushplus_token = ""
+jwsession = ""
 user_agent = 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.16(0x1800103a) NetType/WIFI Language/zh_CN'
 
 
