@@ -6,14 +6,10 @@ import time
 import random
 import requests
 
-# import ast #字符转字典 user_dict = ast.literal_eval(user)
-
-
 # 自己的pushplus token，在pushplus网站中可以找到 http://pushplus.hxtrip.com/
-pushplus_token = ""
+pushplus_token = ''
 jwsession = ""
-user_agent = 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.16(0x1800103a) NetType/WIFI Language/zh_CN'
-
+user_agent = ""
 def pushplus_post(title, content):
     url = 'http://pushplus.hxtrip.com/send'
     data = {
@@ -24,7 +20,6 @@ def pushplus_post(title, content):
     body = json.dumps(data).encode(encoding='utf-8')
     headers = {'Content-Type': 'application/json'}
     requests.post(url, data=body, headers=headers)
-
 
 def unchecked_list_health(date):
     headers = {
@@ -455,29 +450,28 @@ def operate_event(flag=1):
 
 def night_check():
     # 晚上定位签到
-    if time_now == "21:40:00" or time_now == "21:40:01":
-        # 得到最新的签到信息
-        sign_info = get_sign_message()
-        if sign_info == 404:
-            time.sleep(4)
-            night_check()
-        # 比对签到信息
-        time_code = contrast_date(sign_info)
-        if time_code == 0:
-            do_sign(sign_info)
+    # 得到最新的签到信息
+    sign_info = get_sign_message()
+    if sign_info == 404:
+        time.sleep(4)
+        night_check()
+    # 比对签到信息
+    time_code = contrast_date(sign_info)
+    if time_code == 0:
+        do_sign(sign_info)
+        time.sleep(10)
+    elif time_code == -2:
+        # 签到是今天但是签到没有开始，静默等待
+        while time_code == 0:
             time.sleep(10)
-        elif time_code == -2:
-            # 签到是今天但是签到没有开始，静默等待
-            while time_code == 0:
-                time.sleep(10)
-                time_code = contrast_date(sign_info)
-            # 时间开始之后执行签到
-            do_sign(sign_info)
-            time.sleep(10)
-        elif time_code == -3:
-            pushplus_post("签到提醒", "已过签到时间")
-        elif time_code == -1:
-            pushplus_post("签到提醒", "签到未发布或今天没有签到")
+            time_code = contrast_date(sign_info)
+        # 时间开始之后执行签到
+        do_sign(sign_info)
+        time.sleep(10)
+    elif time_code == -3:
+        pushplus_post("签到提醒", "已过签到时间")
+    elif time_code == -1:
+        pushplus_post("签到提醒", "签到未发布或今天没有签到")
 
 def main():
     while True:

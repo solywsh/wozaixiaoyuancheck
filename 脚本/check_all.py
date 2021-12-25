@@ -469,20 +469,22 @@ def main():
         # 新的一天重新生成随机时间
         if week_day_now != week_day_flag:
             time_sec = random.randrange(1, 8, 2)
-            morning_check_time = "07:{}{}:{}{}".format(str(random.randint(0, 5)), str(random.randint(0, 9)),
-                                                       str(random.randint(0, 5)), str(time_sec))
-            _morning_check_time = "07:{}{}:{}{}".format(str(random.randint(0, 5)), str(random.randint(0, 9)),
-                                                        str(random.randint(0, 5)), str(time_sec + 1))  # 构成连续的两秒
+            morning_check_time = "07:{}{}:{}".format(str(random.randint(0, 5)), str(random.randint(0, 9)),
+                                                     str(random.randint(0, 5)))
+            _morning_check_time = morning_check_time + str(time_sec + 1)
+            morning_check_time = morning_check_time + str(time_sec)
+
             time_sec = random.randrange(1, 8, 2)  # 重新生成秒数
-            afternoon_check_time = "11:{}{}:{}{}".format(str(random.randint(3, 5)), str(random.randint(0, 9)),
-                                                         str(random.randint(0, 5)), str(time_sec))
-            _afternoon_check_time = "11:{}{}:{}{}".format(str(random.randint(3, 5)), str(random.randint(0, 9)),
-                                                          str(random.randint(0, 5)), str(time_sec + 1))
+            afternoon_check_time = "11:{}{}:{}".format(str(random.randint(3, 5)), str(random.randint(0, 9)),
+                                                       str(random.randint(0, 5)))
+            _afternoon_check_time = afternoon_check_time + str(time_sec + 1)
+            afternoon_check_time = afternoon_check_time + str(time_sec)
+
             time_sec = random.randrange(1, 8, 2)
-            evening_check_time = "21:{}{}:{}{}".format(str(random.randint(4, 5)), str(random.randint(0, 9)),
-                                                       str(random.randint(0, 5)), str(time_sec))
-            _evening_check_time = "21:{}{}:{}{}".format(str(random.randint(4, 5)), str(random.randint(0, 9)),
-                                                        str(random.randint(0, 5)), str(time_sec + 1))
+            evening_check_time = "21:{}{}:{}".format(str(random.randint(4, 5)), str(random.randint(0, 9)),
+                                                     str(random.randint(0, 5)))
+            _evening_check_time = evening_check_time + str(time_sec + 1)
+            evening_check_time = evening_check_time + str(time_sec)
             week_day_flag = week_day_now
             # 刷新时间
         time_now = time.strftime("%H:%M:%S", time.localtime())
