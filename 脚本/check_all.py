@@ -2,13 +2,16 @@
 import datetime
 import json
 import pprint
+import random
 import time
+
 import requests
+
 # import ast #字符转字典 user_dict = ast.literal_eval(user)
 
 
 # 自己的pushplus token，在pushplus网站中可以找到 http://pushplus.hxtrip.com/
-pushplus_token = ''
+pushplus_token = ""
 jwsession = ""
 user_agent = 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.16(0x1800103a) NetType/WIFI Language/zh_CN'
 
@@ -454,31 +457,52 @@ def operate_event(flag=1):
 
 
 def main():
+    week_day_flag = -1
+    morning_check_time = ""
+    _morning_check_time = ""
+    afternoon_check_time = ""
+    _afternoon_check_time = ""
+    evening_check_time = ""
+    _evening_check_time = ""
     while True:
+        week_day_now = time.strftime("%w", time.localtime())
+        if week_day_now != week_day_flag:
+            morning_check_time = "07:{}{}:{}{}".format(str(random.randint(0, 5)), str(random.randint(0, 9)),
+                                                       str(random.randint(0, 5)), str(random.randrange(1, 10, 2)))
+            _morning_check_time = "07:{}{}:{}{}".format(str(random.randint(0, 5)), str(random.randint(0, 9)),
+                                                        str(random.randint(0, 5)), str(random.randrange(2, 10, 2)))
+            afternoon_check_time = "11:{}{}:{}{}".format(str(random.randint(3, 5)), str(random.randint(0, 9)),
+                                                         str(random.randint(0, 5)), str(random.randrange(1, 10, 2)))
+            _afternoon_check_time = "11:{}{}:{}{}".format(str(random.randint(3, 5)), str(random.randint(0, 9)),
+                                                          str(random.randint(0, 5)), str(random.randrange(2, 10, 2)))
+            evening_check_time = "21:{}{}:{}{}".format(str(random.randint(4, 5)), str(random.randint(0, 9)),
+                                                       str(random.randint(0, 5)), str(random.randrange(1, 10, 2)))
+            _evening_check_time = "21:{}{}:{}{}".format(str(random.randint(4, 5)), str(random.randint(0, 9)),
+                                                        str(random.randint(0, 5)), str(random.randrange(2, 10, 2)))
+            week_day_flag = week_day_now
         # 刷新时间
         time_now = time.strftime("%H:%M:%S", time.localtime())
-
         # 晨检
-        if time_now == "06:30:10" or time_now == "06:30:11":
+        if time_now == morning_check_time or time_now == _morning_check_time:
             morning_check()
         # 午检
-        if time_now == "11:05:00" or time_now == "11:05:01":
+        if time_now == afternoon_check_time or time_now == _afternoon_check_time:
             noon_inspection()
 
-            # 晨检未打卡名单并提醒
-        if time_now == "09:50:00" or time_now == "09:50:01":
-            time_data = time.strftime("%Y%m%d")
-            unchecked_list_morning(time_data)
-            unchecked_list_morning(time_data)  # 检查两次，会出现第一次打卡不完整的情况
-
-        # 午检未打卡名单并提醒
-        if time_now == "14:50:00" or time_now == "14:50:01":
-            time_data = time.strftime("%Y%m%d")
-            unchecked_list_afternoon(time_data)
-            unchecked_list_afternoon(time_data)
+        # # 晨检未打卡名单并提醒
+        # if time_now == "09:50:00" or time_now == "09:50:01":
+        #     time_data = time.strftime("%Y%m%d")
+        #     unchecked_list_morning(time_data)
+        #     unchecked_list_morning(time_data)  # 检查两次，会出现第一次打卡不完整的情况
+        #
+        # # 午检未打卡名单并提醒
+        # if time_now == "14:50:00" or time_now == "14:50:01":
+        #     time_data = time.strftime("%Y%m%d")
+        #     unchecked_list_afternoon(time_data)
+        #     unchecked_list_afternoon(time_data)
 
         # 晚上定位签到
-        if time_now == "21:40:00" or time_now == "21:40:01":
+        if time_now == evening_check_time or time_now == _evening_check_time:
             # 得到最新的签到信息
             sign_info = get_sign_message()
             if sign_info == 404:
@@ -503,17 +527,16 @@ def main():
                 pushplus_post("签到提醒", "签到未发布或今天没有签到")
 
         # 班级晚上定位签到
-        week_day_now = time.strftime("%w", time.localtime())
-        # 排除星期天
-        if week_day_now != "0":
-            time_now = time.strftime("%H:%M:%S", time.localtime())
-            if time_now == "22:40:00" or time_now == "22:40:01":
-                operate_event()  # 打卡
-        # 星期天的情况下
-        else:
-            time_now = time.strftime("%H:%M:%S", time.localtime())
-            if time_now == "22:40:00" or time_now == "22:40:01":
-                operate_event(2)  # 返回名单不打卡
+        # # 排除星期天
+        # if week_day_now != "0":
+        #     time_now = time.strftime("%H:%M:%S", time.localtime())
+        #     if time_now == "22:40:00" or time_now == "22:40:01":
+        #         operate_event()  # 打卡
+        # # 星期天的情况下
+        # else:
+        #     time_now = time.strftime("%H:%M:%S", time.localtime())
+        #     if time_now == "22:40:00" or time_now == "22:40:01":
+        #         operate_event(2)  # 返回名单不打卡
         time.sleep(2)  # 停两秒
 
 
