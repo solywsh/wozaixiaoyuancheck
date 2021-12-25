@@ -11,8 +11,8 @@ import requests
 
 
 # 自己的pushplus token，在pushplus网站中可以找到 http://pushplus.hxtrip.com/
-pushplus_token = ""
-jwsession = ""
+pushplus_token = "a6265a189e994e74bf6ab24587bb8891"
+jwsession = "a6db5878f72d4771a998a39c8139cfc8"
 user_agent = 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.16(0x1800103a) NetType/WIFI Language/zh_CN'
 
 
@@ -466,21 +466,25 @@ def main():
     _evening_check_time = ""
     while True:
         week_day_now = time.strftime("%w", time.localtime())
+        # 新的一天重新生成随机时间
         if week_day_now != week_day_flag:
+            time_sec = random.randrange(1, 8, 2)
             morning_check_time = "07:{}{}:{}{}".format(str(random.randint(0, 5)), str(random.randint(0, 9)),
-                                                       str(random.randint(0, 5)), str(random.randrange(1, 10, 2)))
+                                                       str(random.randint(0, 5)), str(time_sec))
             _morning_check_time = "07:{}{}:{}{}".format(str(random.randint(0, 5)), str(random.randint(0, 9)),
-                                                        str(random.randint(0, 5)), str(random.randrange(2, 10, 2)))
+                                                        str(random.randint(0, 5)), str(time_sec + 1))  # 构成连续的两秒
+            time_sec = random.randrange(1, 8, 2)  # 重新生成秒数
             afternoon_check_time = "11:{}{}:{}{}".format(str(random.randint(3, 5)), str(random.randint(0, 9)),
-                                                         str(random.randint(0, 5)), str(random.randrange(1, 10, 2)))
+                                                         str(random.randint(0, 5)), str(time_sec))
             _afternoon_check_time = "11:{}{}:{}{}".format(str(random.randint(3, 5)), str(random.randint(0, 9)),
-                                                          str(random.randint(0, 5)), str(random.randrange(2, 10, 2)))
+                                                          str(random.randint(0, 5)), str(time_sec + 1))
+            time_sec = random.randrange(1, 8, 2)
             evening_check_time = "21:{}{}:{}{}".format(str(random.randint(4, 5)), str(random.randint(0, 9)),
-                                                       str(random.randint(0, 5)), str(random.randrange(1, 10, 2)))
+                                                       str(random.randint(0, 5)), str(time_sec))
             _evening_check_time = "21:{}{}:{}{}".format(str(random.randint(4, 5)), str(random.randint(0, 9)),
-                                                        str(random.randint(0, 5)), str(random.randrange(2, 10, 2)))
+                                                        str(random.randint(0, 5)), str(time_sec + 1))
             week_day_flag = week_day_now
-        # 刷新时间
+            # 刷新时间
         time_now = time.strftime("%H:%M:%S", time.localtime())
         # 晨检
         if time_now == morning_check_time or time_now == _morning_check_time:
