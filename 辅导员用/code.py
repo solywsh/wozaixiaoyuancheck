@@ -4,6 +4,7 @@ import json
 import time
 import random
 import requests
+import hashlib
 
 
 def daily_check(date, config_info, seq):
@@ -62,12 +63,16 @@ def daily_check(date, config_info, seq):
 
 
 def check_for_classmate(userid, _seq, jwsession, user_agent):
+    sign_time = int(round(time.time() * 1000))  # 13位
+    content = f"陕西省_{sign_time}_西安市"
+    signatureHeader = hashlib.sha256(content.encode('utf-8')).hexdigest()
     headers = {
         "jwsession": jwsession,
         'user-agent': user_agent
     }
     hpostdata = "answers=%5B%220%22%5D&seq=" + str(_seq) + "&temperature=36.0&userId=" + str(
-        userid) + "&latitude=&longitude=&country=&city=&district=&province=&township=&street=&areacode=&timestampHeader=" + str(int(time.time() * 1000))
+        userid) + "&latitude=&longitude=&country=&city=&district=&province=&township=&street=&areacode=&timestampHeader=" + str(
+        sign_time) + "&signatureHeader=" + signatureHeader
     url = 'https://teacher.wozaixiaoyuan.com/heat/save.json?' + hpostdata
     s = requests.session()
     r = s.get(url, headers=headers)

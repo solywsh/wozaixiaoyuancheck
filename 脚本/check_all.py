@@ -6,7 +6,7 @@ import random
 import time
 
 import requests
-
+import hashlib
 # import ast #字符转字典 user_dict = ast.literal_eval(user)
 
 
@@ -112,8 +112,15 @@ def health_check_in():
         "jwsession": jwsession,
         'user-agent': user_agent
     }
+    sign_time = int(round(time.time() * 1000))  # 13位
+    content = f"陕西省_{sign_time}_西安市"
+    signatureHeader = hashlib.sha256(content.encode('utf-8')).hexdigest()
+
     hpostdata = {
-        'answers': '["0","36.5"]',
+        'answers': '["0"]',
+        'seq': '1',
+        'temperature': '36.5',
+        'userid': '',
         'latitude': '34.108216',
         'longitude': '108.605084',
         'country': '中国',
@@ -122,7 +129,9 @@ def health_check_in():
         'province': '陕西省',
         'township': '甘亭街道',
         'street': '东街',
-        'areacode': '610118'
+        'myArea': '610118',
+        'timestampHeader': str(sign_time),
+        'signatureHeader': signatureHeader
     }
     url = 'https://student.wozaixiaoyuan.com/health/save.json'
     s = requests.session()
@@ -171,10 +180,14 @@ def noon_inspection():
         "jwsession": jwsession,
         'user-agent': user_agent
     }
+    sign_time = int(round(time.time() * 1000))  # 13位
+    content = f"陕西省_{sign_time}_西安市"
+    signatureHeader = hashlib.sha256(content.encode('utf-8')).hexdigest()
+
     hpostdata = {
-        'answers': '["0","36.5"]',
+        'answers': '["0"]',
         'seq': '2',
-        'temperature': '36.6',
+        'temperature': '36.5',
         'userid': '',
         'latitude': '34.108216',
         'longitude': '108.605084',
@@ -185,8 +198,8 @@ def noon_inspection():
         'township': '甘亭街道',
         'street': '东街',
         'myArea': '610118',
-        'areacode': '610118',
-        "timestampHeader": str(int(time.time() * 1000))
+        'timestampHeader': str(sign_time),
+        'signatureHeader': signatureHeader
     }
     url = 'https://student.wozaixiaoyuan.com/heat/save.json'
     s = requests.session()
@@ -199,28 +212,16 @@ def noon_inspection():
 
 
 def morning_check_for_classmate(userid):
+    sign_time = int(round(time.time() * 1000))  # 13位
+    content = f"陕西省_{sign_time}_西安市"
+    signatureHeader = hashlib.sha256(content.encode('utf-8')).hexdigest()
     headers = {
         "jwsession": jwsession,
         'user-agent': user_agent
     }
-    hpostdata = "answers=%5B%220%22%5D&seq=1&temperature=36.5&userId=" + userid + "&latitude=&longitude=&country=%E4%B8%AD%E5%9B%BD&city=%E8%A5%BF%E5%AE%89%E5%B8%82&district=%E9%84%A0%E9%82%91%E5%8C%BA&province=%E9%99%95%E8%A5%BF%E7%9C%81&township=&street=&myArea=&areacode="
-
-    # hpostdata = {
-    #     'answers': '["0"]',
-    #     'seq': '2',
-    #     'temperature': '36.5',
-    #     'userid': userid,
-    #     'latitude': '',
-    #     'longitude': '',
-    #     'country': '中国',
-    #     'city': '西安市',
-    #     'district': '鄠邑区',
-    #     'province': '陕西省',
-    #     'township': '',
-    #     'street': '',
-    #     'myArea': '',
-    #     'areacode': ''
-    # }
+    hpostdata = "answers=%5B%220%22%5D&seq=1&temperature=36.0&userId=" + str(
+        userid) + "&latitude=&longitude=&country=&city=&district=&province=&township=&street=&areacode=&timestampHeader=" + str(
+        sign_time) + "&signatureHeader=" + signatureHeader
 
     url = 'https://student.wozaixiaoyuan.com/heat/save.json'
     s = requests.session()
@@ -229,28 +230,16 @@ def morning_check_for_classmate(userid):
 
 
 def afternoon_check_for_classmate(userid):
+    sign_time = int(round(time.time() * 1000))  # 13位
+    content = f"陕西省_{sign_time}_西安市"
+    signatureHeader = hashlib.sha256(content.encode('utf-8')).hexdigest()
     headers = {
         "jwsession": jwsession,
         'user-agent': user_agent
     }
-    hpostdata = "answers=%5B%220%22%5D&seq=2&temperature=36.5&userId=" + userid + "&latitude=&longitude=&country=%E4%B8%AD%E5%9B%BD&city=%E8%A5%BF%E5%AE%89%E5%B8%82&district=%E9%84%A0%E9%82%91%E5%8C%BA&province=%E9%99%95%E8%A5%BF%E7%9C%81&township=&street=&myArea=&areacode="
-
-    # hpostdata = {
-    #     'answers' : '["0"]',
-    #     'seq' : '2',
-    #     'temperature' : '36.5',
-    #     'userid' : userid,
-    #     'latitude' : '',
-    #     'longitude' : '',
-    #     'country' : '中国',
-    #     'city' : '西安市',
-    #     'district' : '鄠邑区',
-    #     'province' : '陕西省',
-    #     'township' : '',
-    #     'street' : '',
-    #     'myArea' : '',
-    #     'areacode' : ''
-    # }
+    hpostdata = "answers=%5B%220%22%5D&seq=2&temperature=36.0&userId=" + str(
+        userid) + "&latitude=&longitude=&country=&city=&district=&province=&township=&street=&areacode=&timestampHeader=" + str(
+        sign_time) + "&signatureHeader=" + signatureHeader
 
     url = 'https://student.wozaixiaoyuan.com/heat/save.json'
     s = requests.session()

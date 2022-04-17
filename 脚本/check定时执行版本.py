@@ -5,11 +5,14 @@ import pprint
 import time
 import random
 import requests
+import hashlib
 
 # 自己的pushplus token，在pushplus网站中可以找到 http://pushplus.hxtrip.com/
 pushplus_token = ''
 jwsession = ""
 user_agent = ""
+
+
 def pushplus_post(title, content):
     url = 'http://pushplus.hxtrip.com/send'
     data = {
@@ -20,6 +23,7 @@ def pushplus_post(title, content):
     body = json.dumps(data).encode(encoding='utf-8')
     headers = {'Content-Type': 'application/json'}
     requests.post(url, data=body, headers=headers)
+
 
 def unchecked_list_health(date):
     headers = {
@@ -100,31 +104,31 @@ def unchecked_list_afternoon(date):
         pushplus_post("班级午检未打卡提醒", "jwsession可能失效!")
 
 
-def health_check_in():
-    headers = {
-        "jwsession": jwsession,
-        'user-agent': user_agent
-    }
-    hpostdata = {
-        'answers': '["0","36.5"]',
-        'latitude': '34.108216',
-        'longitude': '108.605084',
-        'country': '中国',
-        'city': '西安市',
-        'district': '鄠邑区',
-        'province': '陕西省',
-        'township': '甘亭街道',
-        'street': '东街',
-        'areacode': '610118'
-    }
-    url = 'https://student.wozaixiaoyuan.com/health/save.json'
-    s = requests.session()
-    r = s.post(url, data=hpostdata, headers=headers)
-    r_json = json.loads(r.text)
-    if r_json['code'] == 0:
-        pushplus_post("个人健康打卡打卡提醒", "打卡成功")
-    else:
-        pushplus_post("个人健康打卡打卡提醒", "打卡失败,返回信息为:{0}".format(str(r_json)))
+# def health_check_in():
+#     headers = {
+#         "jwsession": jwsession,
+#         'user-agent': user_agent
+#     }
+#     hpostdata = {
+#         'answers': '["0","36.5"]',
+#         'latitude': '34.108216',
+#         'longitude': '108.605084',
+#         'country': '中国',
+#         'city': '西安市',
+#         'district': '鄠邑区',
+#         'province': '陕西省',
+#         'township': '甘亭街道',
+#         'street': '东街',
+#         'areacode': '610118'
+#     }
+#     url = 'https://student.wozaixiaoyuan.com/health/save.json'
+#     s = requests.session()
+#     r = s.post(url, data=hpostdata, headers=headers)
+#     r_json = json.loads(r.text)
+#     if r_json['code'] == 0:
+#         pushplus_post("个人健康打卡打卡提醒", "打卡成功")
+#     else:
+#         pushplus_post("个人健康打卡打卡提醒", "打卡失败,返回信息为:{0}".format(str(r_json)))
 
 
 def morning_check():
@@ -132,6 +136,10 @@ def morning_check():
         "jwsession": jwsession,
         'user-agent': user_agent
     }
+    sign_time = int(round(time.time() * 1000))  # 13位
+    content = f"陕西省_{sign_time}_西安市"
+    signatureHeader = hashlib.sha256(content.encode('utf-8')).hexdigest()
+
     hpostdata = {
         'answers': '["0"]',
         'seq': '1',
@@ -145,7 +153,9 @@ def morning_check():
         'province': '陕西省',
         'township': '甘亭街道',
         'street': '东街',
-        'myArea': '610118'
+        'myArea': '610118',
+        'timestampHeader': str(sign_time),
+        'signatureHeader': signatureHeader
     }
     url = 'https://student.wozaixiaoyuan.com/heat/save.json'
     s = requests.session()
@@ -163,10 +173,14 @@ def noon_inspection():
         "jwsession": jwsession,
         'user-agent': user_agent
     }
+    sign_time = int(round(time.time() * 1000))  # 13位
+    content = f"陕西省_{sign_time}_西安市"
+    signatureHeader = hashlib.sha256(content.encode('utf-8')).hexdigest()
+
     hpostdata = {
-        'answers': '["0","36.5"]',
+        'answers': '["0"]',
         'seq': '2',
-        'temperature': '36.6',
+        'temperature': '36.5',
         'userid': '',
         'latitude': '34.108216',
         'longitude': '108.605084',
@@ -177,7 +191,8 @@ def noon_inspection():
         'township': '甘亭街道',
         'street': '东街',
         'myArea': '610118',
-        'areacode': '610118'
+        'timestampHeader': str(sign_time),
+        'signatureHeader': signatureHeader
     }
     url = 'https://student.wozaixiaoyuan.com/heat/save.json'
     s = requests.session()
@@ -190,28 +205,16 @@ def noon_inspection():
 
 
 def morning_check_for_classmate(userid):
+    sign_time = int(round(time.time() * 1000))  # 13位
+    content = f"陕西省_{sign_time}_西安市"
+    signatureHeader = hashlib.sha256(content.encode('utf-8')).hexdigest()
     headers = {
         "jwsession": jwsession,
         'user-agent': user_agent
     }
-    hpostdata = "answers=%5B%220%22%5D&seq=1&temperature=36.5&userId=" + userid + "&latitude=&longitude=&country=%E4%B8%AD%E5%9B%BD&city=%E8%A5%BF%E5%AE%89%E5%B8%82&district=%E9%84%A0%E9%82%91%E5%8C%BA&province=%E9%99%95%E8%A5%BF%E7%9C%81&township=&street=&myArea=&areacode="
-
-    # hpostdata = {
-    #     'answers': '["0"]',
-    #     'seq': '2',
-    #     'temperature': '36.5',
-    #     'userid': userid,
-    #     'latitude': '',
-    #     'longitude': '',
-    #     'country': '中国',
-    #     'city': '西安市',
-    #     'district': '鄠邑区',
-    #     'province': '陕西省',
-    #     'township': '',
-    #     'street': '',
-    #     'myArea': '',
-    #     'areacode': ''
-    # }
+    hpostdata = "answers=%5B%220%22%5D&seq=1&temperature=36.0&userId=" + str(
+        userid) + "&latitude=&longitude=&country=&city=&district=&province=&township=&street=&areacode=&timestampHeader=" + str(
+        sign_time) + "&signatureHeader=" + signatureHeader
 
     url = 'https://student.wozaixiaoyuan.com/heat/save.json'
     s = requests.session()
@@ -220,11 +223,16 @@ def morning_check_for_classmate(userid):
 
 
 def afternoon_check_for_classmate(userid):
+    sign_time = int(round(time.time() * 1000))  # 13位
+    content = f"陕西省_{sign_time}_西安市"
+    signatureHeader = hashlib.sha256(content.encode('utf-8')).hexdigest()
     headers = {
         "jwsession": jwsession,
         'user-agent': user_agent
     }
-    hpostdata = "answers=%5B%220%22%5D&seq=2&temperature=36.5&userId=" + userid + "&latitude=&longitude=&country=%E4%B8%AD%E5%9B%BD&city=%E8%A5%BF%E5%AE%89%E5%B8%82&district=%E9%84%A0%E9%82%91%E5%8C%BA&province=%E9%99%95%E8%A5%BF%E7%9C%81&township=&street=&myArea=&areacode="
+    hpostdata = "answers=%5B%220%22%5D&seq=2&temperature=36.0&userId=" + str(
+        userid) + "&latitude=&longitude=&country=&city=&district=&province=&township=&street=&areacode=&timestampHeader=" + str(
+        sign_time) + "&signatureHeader=" + signatureHeader
 
     # hpostdata = {
     #     'answers' : '["0"]',
@@ -448,6 +456,7 @@ def operate_event(flag=1):
             pushplus_post("今日班级打卡情况", "签到未发布或今天没有签到")
             break
 
+
 def night_check():
     # 晚上定位签到
     # 得到最新的签到信息
@@ -473,6 +482,7 @@ def night_check():
     elif time_code == -1:
         pushplus_post("签到提醒", "签到未发布或今天没有签到")
 
+
 def main():
     while True:
         # 刷新时间
@@ -497,8 +507,6 @@ def main():
             unchecked_list_afternoon(time_data)
             unchecked_list_afternoon(time_data)
 
-
-
         # 班级晚上定位签到
         week_day_now = time.strftime("%w", time.localtime())
         # 排除星期天
@@ -518,12 +526,12 @@ if __name__ == "__main__":
     sleeptime = random.randint(1, 30)
     time.sleep(sleeptime)
     time_now = time.strftime("%H:%M:%S", time.localtime())
-    #晨检
+    # 晨检
     if "06:00:00" < time_now < "10:00:00":
         morning_check()
-    #午检
+    # 午检
     elif "11:00:00" < time_now < "15:00:00":
         noon_inspection()
-    #校园签到
+    # 校园签到
     elif "21:30:00" < time_now < "22:30:00":
         night_check()
