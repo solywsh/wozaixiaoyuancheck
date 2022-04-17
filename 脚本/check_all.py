@@ -152,7 +152,8 @@ def morning_check():
         'province': '陕西省',
         'township': '甘亭街道',
         'street': '东街',
-        'myArea': '610118'
+        'myArea': '610118',
+        "timestampHeader": str(int(time.time() * 1000))
     }
     url = 'https://student.wozaixiaoyuan.com/heat/save.json'
     s = requests.session()
@@ -184,7 +185,8 @@ def noon_inspection():
         'township': '甘亭街道',
         'street': '东街',
         'myArea': '610118',
-        'areacode': '610118'
+        'areacode': '610118',
+        "timestampHeader": str(int(time.time() * 1000))
     }
     url = 'https://student.wozaixiaoyuan.com/heat/save.json'
     s = requests.session()
@@ -473,29 +475,33 @@ def main():
                                                      str(random.randint(0, 5)))
             _morning_check_time = morning_check_time + str(time_sec + 1)
             morning_check_time = morning_check_time + str(time_sec)
+            print(morning_check_time, _morning_check_time)
 
             time_sec = random.randrange(1, 8, 2)  # 重新生成秒数
             afternoon_check_time = "11:{}{}:{}".format(str(random.randint(3, 5)), str(random.randint(0, 9)),
                                                        str(random.randint(0, 5)))
             _afternoon_check_time = afternoon_check_time + str(time_sec + 1)
             afternoon_check_time = afternoon_check_time + str(time_sec)
+            print(afternoon_check_time, _afternoon_check_time)
 
             time_sec = random.randrange(1, 8, 2)
             evening_check_time = "21:{}{}:{}".format(str(random.randint(4, 5)), str(random.randint(0, 9)),
                                                      str(random.randint(0, 5)))
             _evening_check_time = evening_check_time + str(time_sec + 1)
             evening_check_time = evening_check_time + str(time_sec)
+            print(evening_check_time, _evening_check_time)
+            print(week_day_flag, week_day_now)
             week_day_flag = week_day_now
             # 刷新时间
         time_now = time.strftime("%H:%M:%S", time.localtime())
         # 晨检
         if time_now == morning_check_time or time_now == _morning_check_time:
             morning_check()
-            time.sleep(2)
+            time.sleep(10)
         # 午检
         if time_now == afternoon_check_time or time_now == _afternoon_check_time:
             noon_inspection()
-            time.sleep(2)
+            time.sleep(10)
         # # 晨检未打卡名单并提醒
         # if time_now == "09:50:00" or time_now == "09:50:01":
         #     time_data = time.strftime("%Y%m%d")

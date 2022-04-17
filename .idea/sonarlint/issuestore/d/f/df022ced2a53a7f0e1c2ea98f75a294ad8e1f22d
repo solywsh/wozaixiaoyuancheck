@@ -1,15 +1,0 @@
-
-python:S1192&"bDefine a constant instead of duplicating this literal 'application/x-www-form-urlencoded' 3 times.(’Χ‡ψÿÿÿÿ
-§python:S1192$"‰Define a constant instead of duplicating this literal 'SESSION=NGY4ZGYwNGMtZTQ3ZC00ZDRmLTg2MmEtNDRhMDYyOTZlYTAw;path=/;HttpOnly' 3 times.(‰® Γϊÿÿÿÿ
-jpython:S1192)"RDefine a constant instead of duplicating this literal 'gzip, deflate, br' 3 times.(ίÿΆ΄
-’python:S1192%"ωDefine a constant instead of duplicating this literal 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36 MicroMessenger/7.0.9.501 NetType/WIFI MiniProgramEnv/Windows WindowsWechat' 3 times.(η 
-python:S1192("Define a constant instead of duplicating this literal 'https://servicewechat.com/wxce6d08f781975d91/143/page-frame.html' 3 times.(Ψπ
-tpython:S117"XRename this local variable "smtpObj" to match the regular expression ^[_a-z][a-z0-9_]*$.(³›γώÿÿÿÿ
-gpython:S1542"ORename function "sendEmail" to match the regular expression ^[a-z_][a-z0-9_]*$.(σÿΙΨ
-vpython:S117+"ZRename this local variable "Hpostdata" to match the regular expression ^[_a-z][a-z0-9_]*$.(ήτμϋÿÿÿÿ
-ppython:S1542!"SRename function "HealthCheckIn" to match the regular expression ^[a-z_][a-z0-9_]*$.(²Ξ•ύÿÿÿÿ
-qpython:S117K"ZRename this local variable "Mpostdata" to match the regular expression ^[_a-z][a-z0-9_]*$.(π­ΤΏ
-jpython:S1542A"RRename function "MorningCheck" to match the regular expression ^[a-z_][a-z0-9_]*$.(‰ώ¥
-Bpython:S1481\"%Remove the unused local variable "r".(ϋξªόÿÿÿÿ
-lpython:S1542_"TRename function "NoonInspection" to match the regular expression ^[a-z_][a-z0-9_]*$.(ηªλ
-7python:S125"Remove this commented out code.(ΠμΉζ

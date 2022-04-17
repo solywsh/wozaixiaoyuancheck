@@ -1,0 +1,9 @@
+/.idea
+/.PVS-Studio
+/check_flask/__pycache__
+/check_flask/.vscode
+/check_flask/FlaskForCheck_venv
+/check_flask/logs
+/辅导员用/__pycache__
+/辅导员用/build/code
+/辅导员用/dist
